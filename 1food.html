@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Foodie - Delicious Food</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#fffaf5;
+    color:#222;
+}
+
+/* NAVBAR */
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:white;
+    box-shadow:0 3px 15px rgba(0,0,0,0.08);
+}
+
+.navbar{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 25px;
+}
+
+.logo{
+    font-size:30px;
+    font-weight:bold;
+    color:#ff4d2d;
+}
+
+.logo span{
+    color:#222;
+}
+
+nav a{
+    text-decoration:none;
+    color:#333;
+    margin:0 15px;
+    font-weight:600;
+}
+
+nav a:hover{
+    color:#ff4d2d;
+}
+
+.cart{
+    background:#ff4d2d;
+    color:white;
+    padding:10px 17px;
+    border-radius:25px;
+    cursor:pointer;
+}
+
+/* HERO */
+.hero{
+    min-height:600px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:70px 20px;
+    background:
+        radial-gradient(circle at 20% 20%, #ffe0c7, transparent 30%),
+        radial-gradient(circle at 80% 70%, #ffd0b8, transparent 30%),
+        linear-gradient(135deg,#fff7ef,#ffe9dc);
+}
+
+.hero-content{
+    max-width:850px;
+}
+
+.hero h1{
+    font-size:65px;
+    line-height:1.05;
+    margin-bottom:20px;
+}
+
+.hero h1 span{
+    color:#ff4d2d;
+}
+
+.hero p{
+    font-size:20px;
+    color:#666;
+    margin-bottom:30px;
+}
+
+.btn{
+    display:inline-block;
+    background:#ff4d2d;
+    color:white;
+    padding:15px 30px;
+    border-radius:30px;
+    text-decoration:none;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 25px rgba(255,77,45,.3);
+}
+
+/* SECTION */
+section{
+    max-width:1200px;
+    margin:auto;
+    padding:70px 25px;
+}
+
+.title{
+    text-align:center;
+    font-size:38px;
+    margin-bottom:40px;
+}
+
+.title span{
+    color:#ff4d2d;
+}
+
+/* CATEGORIES */
+.categories{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.category{
+    background:white;
+    padding:30px 15px;
+    text-align:center;
+    border-radius:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,.07);
+    transition:.3s;
+    cursor:pointer;
+}
+
+.category:hover{
+    transform:translateY(-8px);
+}
+
+.category .emoji{
+    font-size:55px;
+    margin-bottom:15px;
+}
+
+.category h3{
+    font-size:20px;
+}
+
+/* FOOD */
+.food-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.food-card{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 6px 25px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.food-card:hover{
+    transform:translateY(-8px);
+}
+
+.food-image{
+    height:210px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:100px;
+    background:linear-gradient(135deg,#ffe5d5,#fff2ea);
+}
+
+.food-info{
+    padding:20px;
+}
+
+.food-info h3{
+    font-size:23px;
+    margin-bottom:8px;
+}
+
+.food-info p{
+    color:#777;
+    margin-bottom:15px;
+}
+
+.price{
+    color:#ff4d2d;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.add{
+    float:right;
+    border:0;
+    background:#ff4d2d;
+    color:white;
+    padding:9px 15px;
+    border-radius:20px;
+    cursor:pointer;
+}
+
+/* OFFER */
+.offer{
+    margin:40px auto;
+    max-width:1150px;
+    padding:50px;
+    border-radius:30px;
+    background:linear-gradient(135deg,#ff4d2d,#ff8a65);
+    color:white;
+    text-align:center;
+}
+
+.offer h2{
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.offer p{
+    font-size:19px;
+    margin-bottom:25px;
+}
+
+.offer .btn{
+    background:white;
+    color:#ff4d2d;
+}
+
+/* FOOTER */
+footer{
+    background:#171717;
+    color:white;
+    text-align:center;
+    padding:45px 20px;
+}
+
+footer h2{
+    color:#ff4d2d;
+    margin-bottom:15px;
+}
+
+footer p{
+    color:#bbb;
+}
+
+/* RESPONSIVE */
+@media(max-width:800px){
+
+    .navbar{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    nav a{
+        margin:5px;
+        font-size:14px;
+    }
+
+    .hero h1{
+        font-size:45px;
+    }
+
+    .categories{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .food-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:500px){
+
+    .categories{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:38px;
+    }
+
+    .offer{
+        margin:20px;
+        padding:35px 20px;
+    }
+
+    .offer h2{
+        font-size:30px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header>
+<div class="navbar">
+
+<div class="logo">
+🍴 Food<span>ie</span>
+</div>
+
+<nav>
+<a href="#home">Home</a>
+<a href="#categories">Categories</a>
+<a href="#menu">Menu</a>
+<a href="#contact">Contact</a>
+</nav>
+
+<div class="cart">
+🛒 Cart <span id="cartCount">0</span>
+</div>
+
+</div>
+</header>
+
+
+<!-- HERO -->
+<section class="hero" id="home">
+
+<div class="hero-content">
+
+<h1>
+Delicious Food,<br>
+<span>Delivered Fast!</span>
+</h1>
+
+<p>
+Fresh ingredients, amazing flavors and your favorite meals
+delivered straight to your door.
+</p>
+
+<a href="#menu" class="btn">
+Explore Menu 🍽️
+</a>
+
+</div>
+
+</section>
+
+
+<!-- CATEGORIES -->
+<section id="categories">
+
+<h2 class="title">
+Explore <span>Categories</span>
+</h2>
+
+<div class="categories">
+
+<div class="category">
+<div class="emoji">🍕</div>
+<h3>Pizza</h3>
+</div>
+
+<div class="category">
+<div class="emoji">🍔</div>
+<h3>Burgers</h3>
+</div>
+
+<div class="category">
+<div class="emoji">🍜</div>
+<h3>Noodles</h3>
+</div>
+
+<div class="category">
+<div class="emoji">🍰</div>
+<h3>Desserts</h3>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- MENU -->
+<section id="menu">
+
+<h2 class="title">
+Popular <span>Food</span>
+</h2>
+
+<div class="food-grid">
+
+<!-- FOOD 1 -->
+<div class="food-card">
+
+<div class="food-image">
+🍕
+</div>
+
+<div class="food-info">
+
+<h3>Cheese Pizza</h3>
+
+<p>
+Loaded with delicious cheese and fresh toppings.
+</p>
+
+<span class="price">₹249</span>
+
+<button class="add" onclick="addCart()">
++ Add
+</button>
+
+</div>
+</div>
+
+
+<!-- FOOD 2 -->
+<div class="food-card">
+
+<div class="food-image">
+🍔
+</div>
+
+<div class="food-info">
+
+<h3>Classic Burger</h3>
+
+<p>
+Juicy burger with crispy lettuce and special sauce.
+</p>
+
+<span class="price">₹179</span>
+
+<button class="add" onclick="addCart()">
++ Add
+</button>
+
+</div>
+</div>
+
+
+<!-- FOOD 3 -->
+<div class="food-card">
+
+<div class="food-image">
+🍜
+</div>
+
+<div class="food-info">
+
+<h3>Spicy Noodles</h3>
+
+<p>
+Hot and flavorful noodles packed with vegetables.
+</p>
+
+<span class="price">₹159</span>
+
+<button class="add" onclick="addCart()">
++ Add
+</button>
+
+</div>
+</div>
+
+
+<!-- FOOD 4 -->
+<div class="food-card">
+
+<div class="food-image">
+🍗
+</div>
+
+<div class="food-info">
+
+<h3>Crispy Chicken</h3>
+
+<p>
+Crunchy outside, juicy and delicious inside.
+</p>
+
+<span class="price">₹299</span>
+
+<button class="add" onclick="addCart()">
++ Add
+</button>
+
+</div>
+</div>
+
+
+<!-- FOOD 5 -->
+<div class="food-card">
+
+<div class="food-image">
+🌮
+</div>
+
+<div class="food-info">
+
+<h3>Mexican Taco</h3>
+
+<p>
+Fresh taco filled with spicy and tasty ingredients.
+</p>
+
+<span class="price">₹199</span>
+
+<button class="add" onclick="addCart()">
++ Add
+</button>
+
+</div>
+</div>
+
+
+<!-- FOOD 6 -->
+<div class="food-card">
+
+<div class="food-image">
+🍰
+</div>
+
+<div class="food-info">
+
+<h3>Chocolate Cake</h3>
+
+<p>
+Soft chocolate cake with creamy chocolate frosting.
+</p>
+
+<span class="price">₹149</span>
+
+<button class="add" onclick="addCart()">
++ Add
+</button>
+
+</div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- OFFER -->
+<div class="offer">
+
+<h2>🔥 Special Offer</h2>
+
+<p>
+Get <strong>30% OFF</strong> on your first order!
+</p>
+
+<a href="#menu" class="btn">
+ORDER NOW
+</a>
+
+</div>
+
+
+<!-- FOOTER -->
+<footer id="contact">
+
+<h2>🍴 Foodie</h2>
+
+<p>
+Fresh food. Great taste. Happy customers.
+</p>
+
+<br>
+
+<p>
+© 2026 Foodie. All Rights Reserved.
+</p>
+
+</footer>
+
+
+<script>
+
+let cart = 0;
+
+function addCart(){
+
+    cart++;
+
+    document.getElementById("cartCount").innerText = cart;
+
+    alert("Food added to your cart! 🍴");
+
+}
+
+</script>
+
+</body>
+</html>
